@@ -1,0 +1,31 @@
+version: '3.7'
+services: 
+    db:
+        image: mysql:5.6
+        container_name: db.Dockerfile
+        volumes:
+            - ./api/db/data:/var/lib/mysql
+        # restart: always
+        ports: 
+            - "8080:8080"   
+        networks:
+            - my_network
+            
+    api:
+        build: "./api"
+        container_name: Dockerfile
+        # restart: always
+        image: matheusgusman/node
+        volumes:
+             - ./api:/home/node/app
+        ports: 
+          - "3000:3000"
+        networks:
+            - my_network
+        depends_on: 
+            - "db"
+        
+
+networks:
+ my_network:
+  driver: bridge    
