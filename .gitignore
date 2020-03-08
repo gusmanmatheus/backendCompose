@@ -43,9 +43,10 @@ bower_components
 build/Release
 
 # Dependency directories
-./node_modules/
 node_modules/
-api/node_modules
+./api/db/data
+./api/node_modules/
+./api/node_modules/.bin
 jspm_packages/
 api/data/
 # TypeScript v1 declaration files
