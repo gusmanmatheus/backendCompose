@@ -1,12 +1,22 @@
 const express = require('express')
-let app = express();
+const path = require('path')
+const fs = require('fs')
+const morgan = require('morgan')
 
-app.use(express.static("."));
+const app = express();
+
+
+var logStream  =  fs.createWriteStream(
+    path.join(__dirname, 'http-servidor.log'),{flags: 'a'})
+app.use(morgan("combined", {stream:logStream}));
+
+// app.use(express.static(__dirname + '/'))
 
 app.get("/", (req,res)=>{
-    res.sendFile(__dirname + '/index.html')
+res.send('hello, world!')
 })
 
 app.listen("3000", ()=>{
     console.log("Server is listening on port 3000")
 })
+

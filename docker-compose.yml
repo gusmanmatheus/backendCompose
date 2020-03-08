@@ -2,19 +2,22 @@ version: '3.7'
 services: 
     db:
         image: mysql:5.6
-        container_name: db.Dockerfile
+        environment:
+            - MYSQL_USER=root
+            - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+            - MYSQL_DATABASE=proj
         volumes:
+            - ./dump:/dump
             - ./api/db/data:/var/lib/mysql
         # restart: always
         ports: 
-            - "8080:8080"   
+            - "8080:8080"
         networks:
             - my_network
             
     api:
         build: "./api"
-        container_name: Dockerfile
-        # restart: always
+         # restart: always
         image: matheusgusman/node
         volumes:
              - ./api:/home/node/app
@@ -24,8 +27,25 @@ services:
             - my_network
         depends_on: 
             - "db"
-        
-
+    
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        depends_on:
+             - db
+        container_name: projeto-mysqladmin
+        links:
+              - db
+        ports:
+              - "80:80" 
+        networks:
+            - my_network
+        environment:
+                - PMA_HOST=db
+                - PMA_USER=root
+                - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+                - MYSQL_DATABASE=proj
+                - MYSQL_USERNAME=root
+                 
 networks:
  my_network:
   driver: bridge    
