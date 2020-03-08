@@ -46,6 +46,7 @@ build/Release
 node_modules/
 ./api/db/data
 ./api/node_modules/
+api/node_modules/
 ./api/node_modules/.bin
 jspm_packages/
 api/data/
