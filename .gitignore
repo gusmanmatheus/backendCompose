@@ -45,10 +45,9 @@ build/Release
 # Dependency directories
 ./node_modules/
 node_modules/
-api/node_modules/
-./api/node_modules/
+api/node_modules
 jspm_packages/
-
+api/data/
 # TypeScript v1 declaration files
 typings/
 
