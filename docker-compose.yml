@@ -4,7 +4,8 @@ services:
         image: mysql:5.6
         environment:
             - MYSQL_USER=root
-            - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+            - MYSQL_PASSWORD=pass
+            - MYSQL_ROOT_PASSWORD=pass
             - MYSQL_DATABASE=proj
         volumes:
             - ./dump:/dump
@@ -42,7 +43,8 @@ services:
         environment:
                 - PMA_HOST=db
                 - PMA_USER=root
-                - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+                - PMA_PASSWORD=pass
+                - MYSQL_PASSWORD=pass
                 - MYSQL_DATABASE=proj
                 - MYSQL_USERNAME=root
                  

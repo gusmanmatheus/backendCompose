@@ -24,7 +24,7 @@ USE `mydb` ;
 -- Table `mydb`.`Pessoa`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Pessoa` (
-  `idPessoa` INT NOT NULL,
+  `idPessoa` INT NOT NULL  AUTO_INCREMENT,
   `aprender` VARCHAR(45) NULL,
   `ensinar` VARCHAR(45) NULL,
   `nome` VARCHAR(45) NULL,
@@ -38,7 +38,7 @@ ENGINE = InnoDB;
 -- Table `mydb`.`Anuncio`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Anuncio` (
-  `idAnuncio` INT NOT NULL,
+  `idAnuncio` INT NOT NULL  AUTO_INCREMENT,
   `ensinar` VARCHAR(45) NOT NULL,
   `aprender` VARCHAR(45) NOT NULL,
   `tipo` VARCHAR(10) NOT NULL,
@@ -51,7 +51,7 @@ COMMENT = 'n';
 -- Table `mydb`.`Metch`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Metch` (
-  `idMetch` INT NOT NULL,
+  `idMetch` INT NOT NULL AUTO_INCREMENT,
   `dt_inicio` VARCHAR(45) NOT NULL,
   `Anuncio_idAnuncio` INT NOT NULL,
   PRIMARY KEY (`idMetch`, `Anuncio_idAnuncio`),
@@ -87,7 +87,7 @@ ENGINE = InnoDB;
 -- Table `mydb`.`Chat`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Chat` (
-  `idChat` INT NOT NULL,
+  `idChat` INT NOT NULL  AUTO_INCREMENT,
   `Metch_idMetch` INT NOT NULL,
   `Metch_Anuncio_idAnuncio` INT NOT NULL,
   PRIMARY KEY (`idChat`, `Metch_idMetch`, `Metch_Anuncio_idAnuncio`),

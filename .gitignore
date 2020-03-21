@@ -50,6 +50,9 @@ api/node_modules/
 ./api/node_modules/.bin
 jspm_packages/
 api/data/
+yarn.lock
+yarn
+Yarn
 # TypeScript v1 declaration files
 typings/
 

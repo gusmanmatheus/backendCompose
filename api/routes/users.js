@@ -2,61 +2,83 @@ const express = require('express');
 const routes = express.Router();
 const connect = require('../db-connect/db')
 
-routes.get('/', (req,res)=> {
-  const email = req.body.email
-  const senha = req.body.senha
-
-  console.log(email)
-
-   const queryString = `SELECT * FROM People WHERE email = '${email}' AND senha = '${senha}'`
-
- console.log(queryString)
- connect.query(queryString, (err,rows,fields) => {
-
-    if(err) {
-      console.log("Failed to query for Peoples", err)
-      res.sendStatus(500)  
-      res.end()
-      return 
-    }
-    console.log("success")
-
-    res.json(rows)
-    res.end()
-
-  })
-  })
-
-  routes.post('/register',(req,res)=>{
-
-  const green_coins	= '0'
-  const orange_coins = '0'	
-  const name = req.body.name
-  const birth_date = req.body.birth_date 
-  const email = req.body.email
-  const senha = req.body.senha
-  const work = req.body.work
-  const queryString = `INSERT INTO People VALUES ('','${green_coins}', '${orange_coins}', '${name}', '${birth_date}', '${email}', '${senha}', '${work}')` 
+  routes.get('/',async (req, res) => {
+  const user = req.body
+ 
+ 
+  const queryString = `SELECT * FROM People WHERE email = '${user.email}' AND senha = '${user.senha}'`
 
   console.log(queryString)
-  connect.query(queryString, (err,rows,fields) => {
- 
-     if(err) {
-       console.log("Failed to query for Peoples", err)
-       res.sendStatus(500)  
-       res.end()
-       return 
-     }
-     if(rows.insertId !=null || rows.insertId != 0 ){
-      res.json({"succes": "ok"})
+  await connect.query(queryString, (err, rows, fields) => {
+    
+    if (err) {
+      console.log("Failed to query for Peoples", err)
+      res.erroJson("usuario nao cadastrado",res)
+      res.end()
+      return
+    }
+    console.log("success")
+    try{
+    const hash = JSON.stringify(rows[0].email)
+    res.send(hash)
+    res.end()
+    }catch(err){
+      erroJson("nenhum usuario encontrado",res)
+    }
+  })
+})
 
+routes.post('/register', async (req, res) => {
+  const user = req.body
 
-     }
-     console.log("success")
- 
-     res.json(rows)
+  const queryString2 = `SELECT email FROM People where email = '${user.email}'`
+  try {
+    await connect.query(queryString2, function (err, result, fields) {
+      const hasEmail = JSON.stringify(result[0])
+      if (hasEmail != undefined) {
+         erroJson("email ja esta em uso", res)
+      } else {
+        insertUserInDatabase(user, res,req)
+      }
+    }
+    );
+  }
+  catch (err) {
+    console.log(err)
+  }
+})
+
+async function insertUserInDatabase(user,res,req) {
+  const queryString = `INSERT INTO People VALUES ('','${user.green_coins}', '${user.orange_coins}', '${user.name}', '${user.birth_date}', '${user.work}', '${user.email}', '${user.senha}')`
+
+  await connect.query(queryString, (err, rows, fields) => {
+    if (err) {
+      console.log("Failed to query for Peoples", err)
+    erroJson("algum erro aconteceu :(")
+      res.end()
+      return
+    }
+    if (rows.insertId != null || rows.insertId != 0) {
+      req.body.password = undefined
+       res.send(req.body)
+
+    }
+    console.log("success")
      res.end()
- 
-   })
-    })
+
+  })
+}
+
+
+function erroJson(message, res) {
+  const jsonErro = {
+    status: "400",
+    message: message
+  }
+  // res.send(400)
+  res.end(JSON.stringify(jsonErro))
+}
+
+
+
 module.exports = routes;

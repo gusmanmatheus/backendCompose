@@ -3,13 +3,14 @@ const path = require('path')
 const fs = require('fs')
 const morgan = require('morgan')
 const routes = require('./routes/users')
+const bodyParser = require('body-parser')
 const app = express();
-
+app.use(bodyParser.json());
 app.use(express.json());
- app.use(routes);
 
+app.use(routes);
 app.listen("3000", ()=>{
-    console.log("Server is listening on port 3000")
+console.log("Server is listening on port 3000")
 })
 
 var logStream  =  fs.createWriteStream(

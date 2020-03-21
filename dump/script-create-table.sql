@@ -27,7 +27,7 @@ USE `mydb` ;
 -- Table `mydb`.`People`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`People` (
-  `idPeople` INT NOT NULL,
+  `idPeople` INT NOT NULL AUTO_INCREMENT,
   `green_coins` VARCHAR(45) NOT NULL,
   `orange_coins` VARCHAR(45) NOT NULL,
   `name` VARCHAR(45) NOT NULL,
@@ -41,7 +41,7 @@ ENGINE = InnoDB;
 -- Table `mydb`.`Adcense`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Adcense` (
-  `idAdcense` INT NOT NULL,
+  `idAdcense` INT NOT NULL AUTO_INCREMENT,
   `teach` VARCHAR(45) NOT NULL,
   `learn` VARCHAR(45) NOT NULL,
   `type` VARCHAR(10) NOT NULL,
@@ -54,7 +54,7 @@ COMMENT = 'n';
 -- Table `mydb`.`Match`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Match` (
-  `idMetch` INT NOT NULL,
+  `idMetch` INT NOT NULL AUTO_INCREMENT,
   `date_init` VARCHAR(45) NOT NULL,
   `Adcense_idAdcense` INT NOT NULL,
   PRIMARY KEY (`idMetch`, `Adcense_idAdcense`),
@@ -70,7 +70,7 @@ ENGINE = InnoDB;
 -- Table `mydb`.`Chat`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Chat` (
-  `idChat` INT NOT NULL,
+  `idChat` INT NOT NULL AUTO_INCREMENT,
   `Metch_Anuncio_idAnuncio` INT NOT NULL,
   `Match_idMetch` INT NOT NULL,
   `Match_Adcense_idAdcense` INT NOT NULL,
