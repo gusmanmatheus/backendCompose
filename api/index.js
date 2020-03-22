@@ -2,13 +2,17 @@ const express = require('express')
 const path = require('path')
 const fs = require('fs')
 const morgan = require('morgan')
-const routes = require('./routes/users')
-const bodyParser = require('body-parser')
+ const bodyParser = require('body-parser')
 const app = express();
 app.use(bodyParser.json());
 app.use(express.json());
 
-app.use(routes);
+require('./routes/users')(app);
+require('./controllers/projectsControllers')(app);
+
+
+
+
 app.listen("3000", ()=>{
 console.log("Server is listening on port 3000")
 })
