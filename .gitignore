@@ -51,7 +51,7 @@ api/node_modules/
 jspm_packages/
 api/data/
 ./api/configAuth/auth.json
-/api/configAuth/auth.json
+api/configAuth/auth.json
 .\api\configAuth\auth.json
 yarn.lock
 yarn
