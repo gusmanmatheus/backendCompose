@@ -9,6 +9,7 @@ app.use(express.json());
 
 require('./routes/users')(app);
 require('./controllers/projectsControllers')(app);
+require('./routes/adsense')(app);
 
 
 

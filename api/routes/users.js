@@ -11,27 +11,27 @@ routes.get('/', async (req, res) => {
 
   console.log(queryString)
   await connect.query(queryString, async (err, rows, fields) => {
-  
+
     if (err) {
       console.log("Failed to query for Peoples", err)
       res.erroJson("usuario nao cadastrado", res)
       res.end()
       return
-    }   
+    }
     try {
       const hash = rows[0]
-      console.log("bb",hash.password, user.password,"aaaaaa")
+      console.log("bb", hash.password, user.password, "aaaaaa")
       console.log(` hashPassword = ${hash.password} \n senha = ${user.password}`)
 
       if (! await bcypt.compare(user.password, hash.password)) {
         res.erroJson("senha ou email errado")
       }
-    
+
       console.log(` hashPassword = ${hash.password}  \n senha = ${user.password}`)
       hash.password = undefined
       const id = hash.idPeople
       hash.idPeople = undefined
-      res.send({user:hash, token: generaterToken({id: id})})
+      res.send({ user: hash, token: generaterToken({ id: id }) })
       res.end()
     } catch (err) {
       erroJson("nenhum usuario encontrado", res)
@@ -42,14 +42,16 @@ routes.get('/', async (req, res) => {
 routes.post('/register', async (req, res) => {
   const user = req.body
   // user.password = bcypt.
-  const queryString2 = `SELECT email FROM People where email = '${user.email}'`
+  user.orange_coins = "0"
+  user.green_coins = "0"
+   const queryString2 = `SELECT email FROM People where email = '${user.email}'`
   try {
     await connect.query(queryString2, function (err, result, fields) {
       const hasEmail = JSON.stringify(result[0])
       if (hasEmail != undefined) {
         erroJson("email ja esta em uso", res)
       } else {
-        
+
         insertUserInDatabase(user, res, req)
       }
     }
@@ -74,8 +76,8 @@ async function insertUserInDatabase(user, res, req) {
     }
     if (rows.insertId != null || rows.insertId != 0) {
       //  res.send({user:rows, token: generaterToken({id: rows.insertId.idPeople})})
-
-      res.send(req.body)
+      user.password = undefined
+      res.send({ user: user, token: generaterToken({id: rows.insertId }) })
     }
     console.log("success")
     res.end()
@@ -84,8 +86,8 @@ async function insertUserInDatabase(user, res, req) {
 }
 
 //Utils
-function generaterToken(param = {}){
-  return jwt.sign(param,authConfig.secret,{
+function generaterToken(param = {}) {
+  return jwt.sign(param, authConfig.secret, {
     expiresIn: 86400
   });
 }
@@ -100,4 +102,4 @@ function erroJson(message, res) {
 
 
 
-module.exports = app => app.use('/auth', routes)
+  module.exports = app => app.use('/auth', routes)

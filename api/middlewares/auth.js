@@ -18,7 +18,6 @@ const authHeader = req.headers.authorization;
   jwt.verify(token,authConfig.secret,(err,decoded) => {
     if(err) res.status(401).send({error: 'token invalido'});
     req.idPeople = decoded.id;
-    console.log(req.idPeople)
-    return next();
+     return next();
   })
 };
