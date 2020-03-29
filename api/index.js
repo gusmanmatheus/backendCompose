@@ -2,7 +2,7 @@ const express = require('express')
 const path = require('path')
 const fs = require('fs')
 const morgan = require('morgan')
- const bodyParser = require('body-parser')
+const bodyParser = require('body-parser')
 const app = express();
 app.use(bodyParser.json());
 app.use(express.json());

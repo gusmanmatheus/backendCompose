@@ -56,6 +56,9 @@ api/configAuth/auth.json
 yarn.lock
 yarn
 Yarn
+D:\dockercompose\api\node_modules
+D:\dockercompose\api\db
+D:\dockercompose\api\configAuth
 # TypeScript v1 declaration files
 typings/
 

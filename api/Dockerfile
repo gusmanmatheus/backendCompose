@@ -1,6 +1,7 @@
 FROM node:latest
 ENV NODE_PORT=3000
 WORKDIR /home/node/app
-RUN npm install
-ENTRYPOINT npm start
+COPY ["package.json","package-lock.json","./"]
+RUN yarn install
+CMD yarn dev
 EXPOSE $NODE_PORT
