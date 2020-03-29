@@ -12,8 +12,3 @@ app.use(morgan("combined", { stream: logStream }));
 
 
 
-require('./src/routes/users')(app);
-require('./src/controllers/projectsControllers')(app);
-require('./src/routes/adsense')(app);
-
-// app.use(express.static(__dirname + '/'))
