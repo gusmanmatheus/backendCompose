@@ -12,7 +12,7 @@ services:
             - ./api/db/data:/var/lib/mysql
         # restart: always
         ports: 
-            - "8080:8080"
+            - "8080:3306"
         networks:
             - my_network
             
