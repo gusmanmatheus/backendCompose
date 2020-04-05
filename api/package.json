@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "pretest": "NODE_ENV=test sequelize db:migrate",
     "test": "NODE_ENV=test jest",
+    "posttest": "NODE_ENV=test sequelize db:migrate:undo:all",
     "start": "nodemon index.js --ignore __tests__",
     "dev": "node src/index.js"
   },
@@ -15,6 +17,8 @@
     "body-parse": "^0.1.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "factory-girl": "^5.0.4",
+    "faker": "^4.1.0",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.9.1",
     "mysql": "^2.18.1",
@@ -27,6 +31,7 @@
     "nodemon": "^2.0.2",
     "sequelize-cli": "^5.5.1",
     "sqlite3": "^4.1.1",
+    "supertest": "^4.0.2",
     "win-node-env": "^0.4.0"
   }
 }

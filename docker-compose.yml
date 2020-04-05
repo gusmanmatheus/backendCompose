@@ -6,7 +6,7 @@ services:
             - MYSQL_USER=root
             - MYSQL_PASSWORD=pass
             - MYSQL_ROOT_PASSWORD=pass
-            - MYSQL_DATABASE=proj
+            - MYSQL_DATABASE=project
         volumes:
             - ./dump:/dump
             - ./api/db/data:/var/lib/mysql
@@ -45,7 +45,7 @@ services:
                 - PMA_USER=root
                 - PMA_PASSWORD=pass
                 - MYSQL_PASSWORD=pass
-                - MYSQL_DATABASE=proj
+                - MYSQL_DATABASE=project
                 - MYSQL_USERNAME=root
                  
 networks:

@@ -16,6 +16,7 @@ class AppController {
   }
   routes() {
     require('./routes/users')(this.express);
+    require('./routes/SessionRoutes')(this.express);
     require('./controllers/projectsControllers')(this.express);
     require('./routes/adsense')(this.express);
   }
