@@ -33,5 +33,5 @@ Object.keys(db).forEach(modelName => {
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
-
+// db.adsense.hasMany(db.user);
 module.exports = db;

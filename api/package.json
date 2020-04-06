@@ -31,7 +31,6 @@
     "nodemon": "^2.0.2",
     "sequelize-cli": "^5.5.1",
     "sqlite3": "^4.1.1",
-    "supertest": "^4.0.2",
-    "win-node-env": "^0.4.0"
+    "supertest": "^4.0.2"
   }
 }

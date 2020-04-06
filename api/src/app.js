@@ -15,7 +15,7 @@ class AppController {
     this.express.use(bodyParser.json());
   }
   routes() {
-    require('./routes/users')(this.express);
+    // require('./routes/users')(this.express);
     require('./routes/SessionRoutes')(this.express);
     require('./controllers/projectsControllers')(this.express);
     require('./routes/adsense')(this.express);

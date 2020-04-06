@@ -1,4 +1,3 @@
-const connect = require('../db-connect/db');
 const bcypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const authConfig = require("../../configAuth/auth");
