@@ -1,12 +1,14 @@
-const express = require('express')
-let app = express();
+const app = require('./src/app')
+const path = require('path')
+const fs = require('fs')
+const morgan = require('morgan')
 
-app.use(express.static("."));
 
-app.get("/", (req,res)=>{
-    res.sendFile(__dirname + '/index.html')
-})
+app.listen(process.env.PORT || 3000);
 
-app.listen("3000", ()=>{
-    console.log("Server is listening on port 3000")
-})
+var logStream = fs.createWriteStream(
+    path.join(__dirname, 'http-servidor.log'), { flags: 'a' })
+app.use(morgan("combined", { stream: logStream }));
+
+
+
