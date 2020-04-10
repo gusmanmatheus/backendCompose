@@ -1,6 +1,3 @@
-const bcypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const authConfig = require("../../configAuth/auth");
 const { user } = require("../app/models")
 
 class SessionController {

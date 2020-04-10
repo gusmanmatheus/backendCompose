@@ -50,11 +50,11 @@ module.exports = {
         allowNull: true
       }
     },
-    {
-      tableName: 'users',
-      underscored: true,
-      timestamps: true
-    });
+      {
+        tableName: 'users',
+        underscored: true,
+        timestamps: true
+      });
   },
 
   down: (queryInterface, Sequelize) => {
